@@ -39,7 +39,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 5px 60px;
+      padding: 6px 60px;
       background: rgba(26, 19, 51, 0.15);
       backdrop-filter: blur(5px);
       -webkit-backdrop-filter: blur(5px);
@@ -52,7 +52,7 @@
     }
 
     .logo img {
-      height: 100px;
+      height: 52px;
       width: auto;
     }
 
@@ -409,6 +409,100 @@
 
     .purple-heart {
       color: #7c5cbf;
+    }
+
+    /* ── MOBILE RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 8px 20px;
+      }
+      .logo img {
+        height: 70px;
+      }
+      .nav-links {
+        gap: 16px;
+      }
+      .nav-links a {
+        font-size: 0.7rem;
+        letter-spacing: 0;
+      }
+      .hero-section {
+        padding: 100px 24px 48px;
+      }
+      .hero-title {
+        font-size: 2.6rem;
+      }
+      .hero-description {
+        font-size: 0.95rem;
+      }
+      .about-section {
+        padding: 60px 24px;
+      }
+      .about-title {
+        font-size: 2.2rem;
+      }
+      .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .card {
+        padding: 28px 24px;
+      }
+      .card-title {
+        font-size: 1.5rem;
+      }
+      .team-section {
+        padding: 60px 16px;
+      }
+      .team-row {
+        flex-wrap: wrap;
+        gap: 14px;
+        justify-content: center;
+      }
+      .team-member {
+        width: 140px;
+      }
+      .team-member-img {
+        width: 140px;
+        height: 140px;
+      }
+      .team-member-title {
+        font-size: 0.72rem;
+      }
+      .contacts-section {
+        padding: 48px 24px 60px;
+      }
+      .contact-info h4 {
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .navbar {
+        padding: 6px 16px;
+      }
+      .logo img {
+        height: 60px;
+      }
+      .nav-links {
+        gap: 8px;
+      }
+      .nav-links a {
+        font-size: 0.65rem;
+      }
+      .hero-title {
+        font-size: 1.9rem;
+      }
+      .about-title {
+        font-size: 1.8rem;
+      }
+      .team-member {
+        width: 120px;
+      }
+      .team-member-img {
+        width: 120px;
+        height: 120px;
+      }
     }
   </style>
 </head>
