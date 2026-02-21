@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LAPAJ - Liga Acadêmica de Psicologia na Adolescência e Juventude</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-snap-type: y mandatory;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0d0a1a;
+      color: #fff;
+    }
+
+    /* ── FIXED NAVBAR ── */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 60px;
+      background: rgba(26, 19, 51, 0.15);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      border-bottom: 1px solid rgba(167, 139, 250, 0.08);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 100px;
+      width: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #a78bfa;
+    }
+
+    .nav-links .highlight {
+      color: #a78bfa;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .arrow-icon {
+      font-size: 0.75rem;
+    }
+
+    /* ── HERO SECTION ── */
+    .hero-section {
+      background: linear-gradient(135deg, #1a1333 0%, #2d1f4e 50%, #1a1333 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 90px 60px 60px;
+      position: relative;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #6b4ba3, transparent);
+    }
+
+    .hero-content {
+      max-width: 900px;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5rem;
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 40px;
+    }
+
+    .hero-title .italic-highlight {
+      font-style: italic;
+      color: #7c5cbf;
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #e0d8f0;
+      max-width: 700px;
+      margin-bottom: 50px;
+    }
+
+    .hero-description .brand {
+      color: #a78bfa;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      font-style: italic;
+    }
+
+    .hero-description .subtitle {
+      font-style: italic;
+      color: #c4b5e0;
+    }
+
+    .hero-description .highlight-text {
+      color: #a78bfa;
+      font-style: italic;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #a78bfa;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: gap 0.3s ease;
+    }
+
+    .cta-button:hover {
+      gap: 15px;
+    }
+
+    .cta-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border: 1px solid #a78bfa;
+      border-radius: 50%;
+      font-size: 1rem;
+    }
+
+    /* ── ABOUT SECTION ── */
+    .about-section {
+      background: linear-gradient(135deg, #1a1333 0%, #2d1f4e 50%, #1a1333 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 80px 60px;
+      text-align: center;
+      scroll-snap-align: start;
+    }
+
+    .about-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 30px;
+    }
+
+    .about-title .italic-highlight {
+      font-style: italic;
+      color: #a78bfa;
+    }
+
+    .about-description {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: #c4b5e0;
+      max-width: 900px;
+      margin: 0 auto 60px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      max-width: 1100px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: linear-gradient(135deg, #3d2a6b 0%, #4a3578 50%, #3d2a6b 100%);
+      border-radius: 20px;
+      padding: 40px;
+      text-align: left;
+      border: 1px solid rgba(139, 92, 246, 0.3);
+    }
+
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 400;
+      font-style: italic;
+      color: #c4b5e0;
+      margin-bottom: 20px;
+    }
+
+    .card-text {
+      font-size: 0.9rem;
+      line-height: 1.8;
+      color: #a89cc4;
+    }
+
+    /* ── TEAM SECTION ── */
+    .team-section {
+      background: linear-gradient(135deg, #e8dff5 0%, #f0e6fa 50%, #e8dff5 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 30px 30px;
+      position: relative;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+    .team-section::before {
+      content: '';
+      position: absolute;
+      top: 50px;
+      right: -100px;
+      width: 300px;
+      height: 600px;
+      border: 2px solid #c4b5e0;
+      border-radius: 150px;
+      transform: rotate(15deg);
+    }
+
+    .team-section::after {
+      content: '';
+      position: absolute;
+      bottom: 100px;
+      left: -150px;
+      width: 300px;
+      height: 500px;
+      border: 2px solid #c4b5e0;
+      border-radius: 150px;
+      transform: rotate(-20deg);
+    }
+
+    .team-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      text-align: center;
+      color: #1a1333;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+    }
+
+    .team-description {
+      text-align: center;
+      color: #5a4a7a;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      max-width: 700px;
+      margin: 0 auto 30px;
+    }
+
+    .team-grid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .team-row {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .team-member {
+      width: 180px;
+      text-align: center;
+    }
+
+    .team-member-img {
+      width: 180px;
+      height: 180px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(26, 19, 51, 0.3);
+    }
+
+    .team-member img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .team-member-title {
+      display: block;
+      margin-top: 12px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #1a1333;
+      line-height: 1.3;
+    }
+
+    /* ── CONTACTS SECTION ── */
+    .contacts-section {
+      background: linear-gradient(135deg, #e8dff5 0%, #f0e6fa 50%, #e8dff5 100%);
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 60px 60px 100px;
+      scroll-snap-align: start;
+    }
+
+    .contacts-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-align: center;
+      color: #1a1333;
+      margin-bottom: 40px;
+      letter-spacing: 1px;
+    }
+
+    .contacts-list {
+      width: 100%;
+      max-width: 700px;
+    }
+
+    .contact-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      border-bottom: 1px solid #c4b5e0;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .contact-info h4 {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #1a1333;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .contact-info p {
+      font-size: 0.8rem;
+      color: #5a4a7a;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .contact-arrow {
+      color: #1a1333;
+      font-size: 1.2rem;
+      text-decoration: none;
+    }
+
+    .purple-heart {
+      color: #7c5cbf;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── FIXED NAVBAR ── -->
+  <nav class="navbar">
+    <a href="#inicio" class="logo"><img src="images/hd_restoration_result_image.png" alt="LAPAJ Logo"></a>
+    <ul class="nav-links">
+      <li><a href="#inicio">INÍCIO <span class="arrow-icon">↗</span></a></li>
+      <li><a href="#sobre">SOBRE A <span class="highlight">LAPAJ</span> <span class="arrow-icon">↗</span></a></li>
+      <li><a href="#contatos">INTEGRANTES E CONTATOS <span class="arrow-icon">↗</span></a></li>
+    </ul>
+  </nav>
+
+  <!-- ── SECTION 1: Hero ── -->
+  <section class="hero-section" id="inicio">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        Mentes <span class="italic-highlight">jovens</span> exigem<br>
+        métodos <span class="italic-highlight">humanos</span>!
+      </h1>
+
+      <p class="hero-description">
+        Conhecer a <span class="brand">LAPAJ</span> (<span class="subtitle">Liga Acadêmica de Psicologia na Adolescência
+          e Juventude</span>) é estar por dentro de experiências <span class="highlight-text">humanizadas</span> e <span
+          class="highlight-text">empíricas</span>, que abraçam a <span class="highlight-text">singularidade dos jovens e
+          adolescentes</span>.
+      </p>
+
+      <a href="#sobre" class="cta-button">
+        Quero conhecer mais
+        <span class="cta-arrow">↓</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ── SECTION 2: About ── -->
+  <section class="about-section" id="sobre">
+    <h2 class="about-title">
+      O que é a nossa <span class="italic-highlight">Liga<br>Acadêmica</span>?
+    </h2>
+
+    <p class="about-description">
+      A Liga Acadêmica de Psicologia na Adolescência e Juventude (LAPAJ) consiste em uma organização acadêmica,
+      fundada por estudantes. Ela se propõem a buscar aprofundamento empírico e conceitual, tal como ações e projetos
+      de extensão voltados para as fases de desenvolvimento da adolescência e juventude, proporcionando oportunidades
+      de crescimento integral para seus relacionados.
+    </p>
+
+    <div class="cards-grid">
+      <div class="card">
+        <h3 class="card-title">Qual o nosso objetivo?</h3>
+        <p class="card-text">
+          A LAPAJ tem como objetivo compreender a profundidade que rodeia essas fases da vida humana; acolher sua
+          singularidade com humanidade e dignidade; ser diferente e auxiliar quem for possível ainda agora.
+        </p>
+      </div>
+      <div class="card">
+        <h3 class="card-title">Qual a nossa identidade?</h3>
+        <p class="card-text">
+          A Liga adota uma identidade marcada por autenticidade, intriga, e atravessamentos. Uma identidade que visa
+          transmitir a singularidade e a força deste projeto, cativando corações e conectando almas que se identificam
+          com nosso propósito.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SECTION 3: Team ── -->
+  <section class="team-section" id="equipe">
+    <h2 class="team-title">QUEM FAZ PARTE DA LIGA?</h2>
+    <p class="team-description">
+      Um projeto como esse nunca poderia se desenvolver sozinho. Conheça aqui os rostos por trás do funcionamento dessa
+      liga!
+    </p>
+
+    <div class="team-grid">
+      <!-- Row 1: 5 images -->
+      <div class="team-row">
+        <div class="team-member">
+          <div class="team-member-img">
+            <img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.11.jpeg" alt="Diretora de Eventos">
+          </div>
+          <span class="team-member-title">Diretora de Eventos</span>
+        </div>
+        <div class="team-member">
+          <div class="team-member-img">
+            <img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.11%20(1).jpeg" alt="Vice-Diretor de Supply">
+          </div>
+          <span class="team-member-title">Vice-Diretor de Supply</span>
+        </div>
+        <div class="team-member">
+          <div class="team-member-img">
+            <img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.11%20(2).jpeg" alt="Diretora de Supply">
+          </div>
+          <span class="team-member-title">Diretora de Supply</span>
+        </div>
+        <div class="team-member">
+          <div class="team-member-img">
+            <img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.12.jpeg" alt="Diretora de Jurídico">
+          </div>
+          <span class="team-member-title">Diretora de Jurídico</span>
+        </div>
+        <div class="team-member">
+          <div class="team-member-img">
+            <img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.12%20(1).jpeg"
+              alt="Vice-Diretor de Relações Públicas">
+          </div>
+          <span class="team-member-title">Vice-Diretor de<br>Relações Públicas</span>
+        </div>
+      </div>
+      <!-- Row 2: 4 images -->
+      <div class="team-row">
+        <div class="team-member">
+          <div class="team-member-img">
+            <img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.12%20(2).jpeg"
+              alt="Vice-Diretora de Comunicação">
+          </div>
+          <span class="team-member-title">Vice-Diretora de<br>Comunicação</span>
+        </div>
+        <div class="team-member">
+          <div class="team-member-img">
+            <img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.13.jpeg" alt="Diretor de Relações Públicas"
+              style="object-position: top;">
+          </div>
+          <span class="team-member-title">Diretor de<br>Relações Públicas</span>
+        </div>
+        <div class="team-member">
+          <div class="team-member-img">
+            <img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.13%20(1).jpeg" alt="Diretora de Comunicação">
+          </div>
+          <span class="team-member-title">Diretora de<br>Comunicação</span>
+        </div>
+        <div class="team-member">
+          <div class="team-member-img">
+            <img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.13%20(2).jpeg"
+              alt="Diretora de Gestão de Pessoas">
+          </div>
+          <span class="team-member-title">Diretora de<br>Gestão de Pessoas</span>
+        </div>
+      </div>
+      <!-- Row 3: 3 images -->
+      <div class="team-row">
+        <div class="team-member">
+          <div class="team-member-img">
+            <img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.14.jpeg" alt="Diretora de Projetos">
+          </div>
+          <span class="team-member-title">Diretora de Projetos</span>
+        </div>
+        <div class="team-member">
+          <div class="team-member-img">
+            <img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.14%20(1).jpeg" alt="Vice-Presidente">
+          </div>
+          <span class="team-member-title">Vice-Presidente</span>
+        </div>
+        <div class="team-member">
+          <div class="team-member-img">
+            <img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.14%20(2).jpeg" alt="Presidente">
+          </div>
+          <span class="team-member-title">Presidente</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SECTION 4: Contacts ── -->
+  <section class="contacts-section" id="contatos">
+    <h2 class="contacts-title">NOSSOS CONTATOS</h2>
+
+    <div class="contacts-list">
+      <a href="https://wa.me/5524988372871" class="contact-item" target="_blank">
+        <div class="contact-info">
+          <h4>Whatsapp - Maria Luiza <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></h4>
+          <p>NOS ENVIE UMA MENSAGEM DIRETAMENTE!</p>
+        </div>
+        <span class="contact-arrow">↗</span>
+      </a>
+
+      <a href="https://wa.me/5512997330696" class="contact-item" target="_blank">
+        <div class="contact-info">
+          <h4>Whatsapp - Laura <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></h4>
+          <p>NOS ENVIE UMA MENSAGEM DIRETAMENTE!</p>
+        </div>
+        <span class="contact-arrow">↗</span>
+      </a>
+
+      <a href="https://www.instagram.com/l.a.p.a.j?igsh=MTRqNW5uaGN2cGswbA==" class="contact-item" target="_blank">
+        <div class="contact-info">
+          <h4>Instagram <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></h4>
+          <p>ACESSE NOSSO PERFIL E ACOMPANHE! <span class="purple-heart">💜</span></p>
+        </div>
+        <span class="contact-arrow">↗</span>
+      </a>
+    </div>
+  </section>
+
+</body>
+
+</html>
