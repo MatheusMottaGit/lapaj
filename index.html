@@ -7,15 +7,9 @@
   <title>LAPAJ - Liga Acadêmica de Psicologia na Adolescência e Juventude</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;500;600&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     html {
       scroll-behavior: smooth;
@@ -29,32 +23,23 @@
       color: #fff;
     }
 
-    /* ── FIXED NAVBAR ── */
+    /* ── NAVBAR ── */
     .navbar {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       z-index: 100;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 6px 60px;
+      padding: 5px 60px;
       background: rgba(26, 19, 51, 0.15);
       backdrop-filter: blur(5px);
       -webkit-backdrop-filter: blur(5px);
       border-bottom: 1px solid rgba(167, 139, 250, 0.08);
     }
 
-    .logo {
-      display: flex;
-      align-items: center;
-    }
-
-    .logo img {
-      height: 52px;
-      width: auto;
-    }
+    .logo { display: flex; align-items: center; flex-shrink: 0; }
+    .logo img { height: 100px; width: auto; }
 
     .nav-links {
       display: flex;
@@ -74,21 +59,92 @@
       transition: color 0.3s ease;
     }
 
-    .nav-links a:hover {
-      color: #a78bfa;
+    .nav-links a:hover { color: #a78bfa; }
+    .nav-links .highlight { color: #a78bfa; text-decoration: underline; text-underline-offset: 3px; }
+    .arrow-icon { font-size: 0.75rem; }
+
+    /* ── HAMBURGER BUTTON ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+      z-index: 200;
     }
 
-    .nav-links .highlight {
-      color: #a78bfa;
-      text-decoration: underline;
-      text-underline-offset: 3px;
+    .hamburger span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: #fff;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+      transform-origin: center;
     }
 
-    .arrow-icon {
-      font-size: 0.75rem;
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── MOBILE MENU OVERLAY ── */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 150;
+      background: rgba(10, 7, 20, 0.97);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 44px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
     }
 
-    /* ── HERO SECTION ── */
+    .mobile-menu.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .mobile-menu-logo {
+      position: absolute;
+      top: 10px;
+      left: 16px;
+    }
+
+    .mobile-menu-logo img { height: 80px; width: auto; }
+
+    .mobile-menu a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.3rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: color 0.3s ease, opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .mobile-menu.open a:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.05s; }
+    .mobile-menu.open a:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.12s; }
+    .mobile-menu.open a:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 0.19s; }
+
+    .mobile-menu a:hover { color: #a78bfa; }
+    .mobile-menu .highlight { color: #a78bfa; text-decoration: underline; text-underline-offset: 4px; }
+
+    /* ── HERO ── */
     .hero-section {
       background: linear-gradient(135deg, #1a1333 0%, #2d1f4e 50%, #1a1333 100%);
       min-height: 100vh;
@@ -104,16 +160,12 @@
     .hero-section::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       height: 2px;
       background: linear-gradient(90deg, transparent, #6b4ba3, transparent);
     }
 
-    .hero-content {
-      max-width: 900px;
-    }
+    .hero-content { max-width: 900px; }
 
     .hero-title {
       font-family: 'Playfair Display', serif;
@@ -123,10 +175,7 @@
       margin-bottom: 40px;
     }
 
-    .hero-title .italic-highlight {
-      font-style: italic;
-      color: #7c5cbf;
-    }
+    .hero-title .italic-highlight { font-style: italic; color: #7c5cbf; }
 
     .hero-description {
       font-size: 1.1rem;
@@ -136,24 +185,9 @@
       margin-bottom: 50px;
     }
 
-    .hero-description .brand {
-      color: #a78bfa;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      font-style: italic;
-    }
-
-    .hero-description .subtitle {
-      font-style: italic;
-      color: #c4b5e0;
-    }
-
-    .hero-description .highlight-text {
-      color: #a78bfa;
-      font-style: italic;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
+    .hero-description .brand { color: #a78bfa; text-decoration: underline; text-underline-offset: 3px; font-style: italic; }
+    .hero-description .subtitle { font-style: italic; color: #c4b5e0; }
+    .hero-description .highlight-text { color: #a78bfa; font-style: italic; text-decoration: underline; text-underline-offset: 3px; }
 
     .cta-button {
       display: inline-flex;
@@ -165,9 +199,7 @@
       transition: gap 0.3s ease;
     }
 
-    .cta-button:hover {
-      gap: 15px;
-    }
+    .cta-button:hover { gap: 15px; }
 
     .cta-arrow {
       display: flex;
@@ -180,7 +212,7 @@
       font-size: 1rem;
     }
 
-    /* ── ABOUT SECTION ── */
+    /* ── ABOUT ── */
     .about-section {
       background: linear-gradient(135deg, #1a1333 0%, #2d1f4e 50%, #1a1333 100%);
       min-height: 100vh;
@@ -201,10 +233,7 @@
       margin-bottom: 30px;
     }
 
-    .about-title .italic-highlight {
-      font-style: italic;
-      color: #a78bfa;
-    }
+    .about-title .italic-highlight { font-style: italic; color: #a78bfa; }
 
     .about-description {
       font-size: 0.95rem;
@@ -240,13 +269,9 @@
       margin-bottom: 20px;
     }
 
-    .card-text {
-      font-size: 0.9rem;
-      line-height: 1.8;
-      color: #a89cc4;
-    }
+    .card-text { font-size: 0.9rem; line-height: 1.8; color: #a89cc4; }
 
-    /* ── TEAM SECTION ── */
+    /* ── TEAM ── */
     .team-section {
       background: linear-gradient(135deg, #e8dff5 0%, #f0e6fa 50%, #e8dff5 100%);
       min-height: 100vh;
@@ -254,7 +279,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 30px 30px;
+      padding: 30px;
       position: relative;
       overflow: hidden;
       scroll-snap-align: start;
@@ -263,10 +288,8 @@
     .team-section::before {
       content: '';
       position: absolute;
-      top: 50px;
-      right: -100px;
-      width: 300px;
-      height: 600px;
+      top: 50px; right: -100px;
+      width: 300px; height: 600px;
       border: 2px solid #c4b5e0;
       border-radius: 150px;
       transform: rotate(15deg);
@@ -275,10 +298,8 @@
     .team-section::after {
       content: '';
       position: absolute;
-      bottom: 100px;
-      left: -150px;
-      width: 300px;
-      height: 500px;
+      bottom: 100px; left: -150px;
+      width: 300px; height: 500px;
       border: 2px solid #c4b5e0;
       border-radius: 150px;
       transform: rotate(-20deg);
@@ -312,30 +333,18 @@
       z-index: 1;
     }
 
-    .team-row {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-    }
+    .team-row { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
 
-    .team-member {
-      width: 180px;
-      text-align: center;
-    }
+    .team-member { width: 180px; text-align: center; }
 
     .team-member-img {
-      width: 180px;
-      height: 180px;
+      width: 180px; height: 180px;
       border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 10px 30px rgba(26, 19, 51, 0.3);
     }
 
-    .team-member img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+    .team-member img { width: 100%; height: 100%; object-fit: cover; }
 
     .team-member-title {
       display: block;
@@ -346,7 +355,7 @@
       line-height: 1.3;
     }
 
-    /* ── CONTACTS SECTION ── */
+    /* ── CONTACTS ── */
     .contacts-section {
       background: linear-gradient(135deg, #e8dff5 0%, #f0e6fa 50%, #e8dff5 100%);
       min-height: 60vh;
@@ -368,10 +377,7 @@
       letter-spacing: 1px;
     }
 
-    .contacts-list {
-      width: 100%;
-      max-width: 700px;
-    }
+    .contacts-list { width: 100%; max-width: 700px; }
 
     .contact-item {
       display: flex;
@@ -394,115 +400,45 @@
       gap: 8px;
     }
 
-    .contact-info p {
-      font-size: 0.8rem;
-      color: #5a4a7a;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
+    .contact-info p { font-size: 0.8rem; color: #5a4a7a; text-transform: uppercase; letter-spacing: 0.5px; }
+    .contact-arrow { color: #1a1333; font-size: 1.2rem; }
+    .purple-heart { color: #7c5cbf; }
 
-    .contact-arrow {
-      color: #1a1333;
-      font-size: 1.2rem;
-      text-decoration: none;
-    }
-
-    .purple-heart {
-      color: #7c5cbf;
-    }
-
-    /* ── MOBILE RESPONSIVE ── */
+    /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      .navbar {
-        padding: 8px 20px;
-      }
-      .logo img {
-        height: 70px;
-      }
-      .nav-links {
-        gap: 16px;
-      }
-      .nav-links a {
-        font-size: 0.7rem;
-        letter-spacing: 0;
-      }
-      .hero-section {
-        padding: 100px 24px 48px;
-      }
-      .hero-title {
-        font-size: 2.6rem;
-      }
-      .hero-description {
-        font-size: 0.95rem;
-      }
-      .about-section {
-        padding: 60px 24px;
-      }
-      .about-title {
-        font-size: 2.2rem;
-      }
-      .cards-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-      .card {
-        padding: 28px 24px;
-      }
-      .card-title {
-        font-size: 1.5rem;
-      }
-      .team-section {
-        padding: 60px 16px;
-      }
-      .team-row {
-        flex-wrap: wrap;
-        gap: 14px;
-        justify-content: center;
-      }
-      .team-member {
-        width: 140px;
-      }
-      .team-member-img {
-        width: 140px;
-        height: 140px;
-      }
-      .team-member-title {
-        font-size: 0.72rem;
-      }
-      .contacts-section {
-        padding: 48px 24px 60px;
-      }
-      .contact-info h4 {
-        font-size: 0.9rem;
-      }
+      /* Show hamburger, hide desktop links */
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .mobile-menu { display: flex; }
+
+      .navbar { padding: 5px 20px; }
+      .logo img { height: 75px; }
+
+      .hero-section { padding: 100px 24px 48px; }
+      .hero-title { font-size: 2.6rem; }
+      .hero-description { font-size: 0.95rem; }
+
+      .about-section { padding: 60px 24px; }
+      .about-title { font-size: 2.2rem; }
+      .cards-grid { grid-template-columns: 1fr; gap: 20px; }
+      .card { padding: 28px 24px; }
+      .card-title { font-size: 1.5rem; }
+
+      .team-section { padding: 60px 16px; }
+      .team-member { width: 140px; }
+      .team-member-img { width: 140px; height: 140px; }
+      .team-member-title { font-size: 0.72rem; }
+
+      .contacts-section { padding: 48px 24px 60px; }
+      .contact-info h4 { font-size: 0.9rem; }
     }
 
     @media (max-width: 480px) {
-      .navbar {
-        padding: 6px 16px;
-      }
-      .logo img {
-        height: 60px;
-      }
-      .nav-links {
-        gap: 8px;
-      }
-      .nav-links a {
-        font-size: 0.65rem;
-      }
-      .hero-title {
-        font-size: 1.9rem;
-      }
-      .about-title {
-        font-size: 1.8rem;
-      }
-      .team-member {
-        width: 120px;
-      }
-      .team-member-img {
-        width: 120px;
-        height: 120px;
-      }
+      .logo img { height: 65px; }
+      .hero-title { font-size: 1.9rem; }
+      .about-title { font-size: 1.8rem; }
+      .team-member { width: 120px; }
+      .team-member-img { width: 120px; height: 120px; }
     }
   </style>
 </head>
@@ -511,13 +447,30 @@
 
   <!-- ── FIXED NAVBAR ── -->
   <nav class="navbar">
-    <a href="#inicio" class="logo"><img src="images/hd_restoration_result_image.png" alt="LAPAJ Logo"></a>
+    <a href="#inicio" class="logo">
+      <img src="images/hd_restoration_result_image.png" alt="LAPAJ Logo">
+    </a>
     <ul class="nav-links">
       <li><a href="#inicio">INÍCIO <span class="arrow-icon">↗</span></a></li>
       <li><a href="#sobre">SOBRE A <span class="highlight">LAPAJ</span> <span class="arrow-icon">↗</span></a></li>
       <li><a href="#contatos">INTEGRANTES E CONTATOS <span class="arrow-icon">↗</span></a></li>
     </ul>
+    <button class="hamburger" id="hamburger" aria-label="Abrir menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </nav>
+
+  <!-- ── MOBILE MENU ── -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-logo">
+      <img src="images/hd_restoration_result_image.png" alt="LAPAJ Logo">
+    </div>
+    <a href="#inicio" onclick="closeMenu()">INÍCIO <span class="arrow-icon">↗</span></a>
+    <a href="#sobre" onclick="closeMenu()">SOBRE A <span class="highlight">LAPAJ</span> <span class="arrow-icon">↗</span></a>
+    <a href="#contatos" onclick="closeMenu()">INTEGRANTES E CONTATOS <span class="arrow-icon">↗</span></a>
+  </div>
 
   <!-- ── SECTION 1: Hero ── -->
   <section class="hero-section" id="inicio">
@@ -526,14 +479,12 @@
         Mentes <span class="italic-highlight">jovens</span> exigem<br>
         métodos <span class="italic-highlight">humanos</span>!
       </h1>
-
       <p class="hero-description">
         Conhecer a <span class="brand">LAPAJ</span> (<span class="subtitle">Liga Acadêmica de Psicologia na Adolescência
           e Juventude</span>) é estar por dentro de experiências <span class="highlight-text">humanizadas</span> e <span
           class="highlight-text">empíricas</span>, que abraçam a <span class="highlight-text">singularidade dos jovens e
           adolescentes</span>.
       </p>
-
       <a href="#sobre" class="cta-button">
         Quero conhecer mais
         <span class="cta-arrow">↓</span>
@@ -546,14 +497,12 @@
     <h2 class="about-title">
       O que é a nossa <span class="italic-highlight">Liga<br>Acadêmica</span>?
     </h2>
-
     <p class="about-description">
       A Liga Acadêmica de Psicologia na Adolescência e Juventude (LAPAJ) consiste em uma organização acadêmica,
       fundada por estudantes. Ela se propõem a buscar aprofundamento empírico e conceitual, tal como ações e projetos
       de extensão voltados para as fases de desenvolvimento da adolescência e juventude, proporcionando oportunidades
       de crescimento integral para seus relacionados.
     </p>
-
     <div class="cards-grid">
       <div class="card">
         <h3 class="card-title">Qual o nosso objetivo?</h3>
@@ -577,93 +526,60 @@
   <section class="team-section" id="equipe">
     <h2 class="team-title">QUEM FAZ PARTE DA LIGA?</h2>
     <p class="team-description">
-      Um projeto como esse nunca poderia se desenvolver sozinho. Conheça aqui os rostos por trás do funcionamento dessa
-      liga!
+      Um projeto como esse nunca poderia se desenvolver sozinho. Conheça aqui os rostos por trás do funcionamento dessa liga!
     </p>
-
     <div class="team-grid">
-      <!-- Row 1: 5 images -->
       <div class="team-row">
         <div class="team-member">
-          <div class="team-member-img">
-            <img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.11.jpeg" alt="Diretora de Eventos">
-          </div>
+          <div class="team-member-img"><img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.11.jpeg" alt="Diretora de Eventos"></div>
           <span class="team-member-title">Diretora de Eventos</span>
         </div>
         <div class="team-member">
-          <div class="team-member-img">
-            <img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.11%20(1).jpeg" alt="Vice-Diretor de Supply">
-          </div>
+          <div class="team-member-img"><img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.11%20(1).jpeg" alt="Vice-Diretor de Supply"></div>
           <span class="team-member-title">Vice-Diretor de Supply</span>
         </div>
         <div class="team-member">
-          <div class="team-member-img">
-            <img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.11%20(2).jpeg" alt="Diretora de Supply">
-          </div>
+          <div class="team-member-img"><img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.11%20(2).jpeg" alt="Diretora de Supply"></div>
           <span class="team-member-title">Diretora de Supply</span>
         </div>
         <div class="team-member">
-          <div class="team-member-img">
-            <img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.12.jpeg" alt="Diretora de Jurídico">
-          </div>
+          <div class="team-member-img"><img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.12.jpeg" alt="Diretora de Jurídico"></div>
           <span class="team-member-title">Diretora de Jurídico</span>
         </div>
         <div class="team-member">
-          <div class="team-member-img">
-            <img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.12%20(1).jpeg"
-              alt="Vice-Diretor de Relações Públicas">
-          </div>
+          <div class="team-member-img"><img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.12%20(1).jpeg" alt="Vice-Diretor de Relações Públicas"></div>
           <span class="team-member-title">Vice-Diretor de<br>Relações Públicas</span>
         </div>
       </div>
-      <!-- Row 2: 4 images -->
       <div class="team-row">
         <div class="team-member">
-          <div class="team-member-img">
-            <img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.12%20(2).jpeg"
-              alt="Vice-Diretora de Comunicação">
-          </div>
+          <div class="team-member-img"><img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.12%20(2).jpeg" alt="Vice-Diretora de Comunicação"></div>
           <span class="team-member-title">Vice-Diretora de<br>Comunicação</span>
         </div>
         <div class="team-member">
-          <div class="team-member-img">
-            <img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.13.jpeg" alt="Diretor de Relações Públicas"
-              style="object-position: top;">
-          </div>
+          <div class="team-member-img"><img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.13.jpeg" alt="Diretor de Relações Públicas" style="object-position: top;"></div>
           <span class="team-member-title">Diretor de<br>Relações Públicas</span>
         </div>
         <div class="team-member">
-          <div class="team-member-img">
-            <img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.13%20(1).jpeg" alt="Diretora de Comunicação">
-          </div>
+          <div class="team-member-img"><img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.13%20(1).jpeg" alt="Diretora de Comunicação"></div>
           <span class="team-member-title">Diretora de<br>Comunicação</span>
         </div>
         <div class="team-member">
-          <div class="team-member-img">
-            <img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.13%20(2).jpeg"
-              alt="Diretora de Gestão de Pessoas">
-          </div>
+          <div class="team-member-img"><img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.13%20(2).jpeg" alt="Diretora de Gestão de Pessoas"></div>
           <span class="team-member-title">Diretora de<br>Gestão de Pessoas</span>
         </div>
       </div>
-      <!-- Row 3: 3 images -->
       <div class="team-row">
         <div class="team-member">
-          <div class="team-member-img">
-            <img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.14.jpeg" alt="Diretora de Projetos">
-          </div>
+          <div class="team-member-img"><img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.14.jpeg" alt="Diretora de Projetos"></div>
           <span class="team-member-title">Diretora de Projetos</span>
         </div>
         <div class="team-member">
-          <div class="team-member-img">
-            <img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.14%20(1).jpeg" alt="Vice-Presidente">
-          </div>
+          <div class="team-member-img"><img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.14%20(1).jpeg" alt="Vice-Presidente"></div>
           <span class="team-member-title">Vice-Presidente</span>
         </div>
         <div class="team-member">
-          <div class="team-member-img">
-            <img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.14%20(2).jpeg" alt="Presidente">
-          </div>
+          <div class="team-member-img"><img src="images/WhatsApp%20Image%202026-02-20%20at%2011.18.14%20(2).jpeg" alt="Presidente"></div>
           <span class="team-member-title">Presidente</span>
         </div>
       </div>
@@ -673,7 +589,6 @@
   <!-- ── SECTION 4: Contacts ── -->
   <section class="contacts-section" id="contatos">
     <h2 class="contacts-title">NOSSOS CONTATOS</h2>
-
     <div class="contacts-list">
       <a href="https://wa.me/5524988372871" class="contact-item" target="_blank">
         <div class="contact-info">
@@ -682,7 +597,6 @@
         </div>
         <span class="contact-arrow">↗</span>
       </a>
-
       <a href="https://wa.me/5512997330696" class="contact-item" target="_blank">
         <div class="contact-info">
           <h4>Whatsapp - Laura <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></h4>
@@ -690,7 +604,6 @@
         </div>
         <span class="contact-arrow">↗</span>
       </a>
-
       <a href="https://www.instagram.com/l.a.p.a.j?igsh=MTRqNW5uaGN2cGswbA==" class="contact-item" target="_blank">
         <div class="contact-info">
           <h4>Instagram <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></h4>
@@ -701,6 +614,22 @@
     </div>
   </section>
 
-</body>
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
 
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+
+    function closeMenu() {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  </script>
+
+</body>
 </html>
